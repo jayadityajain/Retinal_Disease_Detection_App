@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints/
+*.pkl
+*.h5
+*.log
+
+# Data files
+*.csv
+*.json
+*.zip
+*.tar.gz
+/data/
+datasets/
+raw_data/
+
+# Environment & OS
+.env
+*.DS_Store
+*.vscode/
+.idea/
+
+# Jupyter & outputs
+.ipynb_checkpoints
+*.nbconvert.ipynb
+
+# PDFs and generated reports
+*.pdf
+*.png
+temp_chart_*.png
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# Streamlit
+.streamlit/config.toml
