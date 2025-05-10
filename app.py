@@ -1,153 +1,3 @@
-# import streamlit as st
-# import pickle
-# import numpy as np
-# from tensorflow.keras.models import model_from_json
-# from tensorflow.keras.preprocessing import image
-# from PIL import Image
-
-# # Load model from .pkl file
-# with open("model.pkl", "rb") as f:
-#     data = pickle.load(f)
-
-# model_structure = data["model_structure"]
-# model_weights = data["model_weights"]
-
-# model = model_from_json(model_structure)
-# model.set_weights(model_weights)
-
-# # Define the class names    
-# class_names = ['Diabetic Retinopathy', 'Glaucoma', 'Healthy']  # Update as needed
-
-# # Streamlit UI
-# st.title("Retinal Disease Classifier")
-# st.write("Upload a fundus image and the model will predict the disease.")
-
-# uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png"])
-
-# if uploaded_file is not None:
-#     img = Image.open(uploaded_file).convert("RGB")
-#     st.image(img, caption="Uploaded Image", use_column_width=True)
-
-#     # Preprocess image
-#     img = img.resize((224, 224))  # Match your training size
-#     img_array = image.img_to_array(img) / 255.0
-#     img_array = np.expand_dims(img_array, axis=0)
-
-#     # Predict
-#     prediction = model.predict(img_array)
-#     predicted_class = class_names[np.argmax(prediction)]
-
-#     st.markdown(f"### 🧠 Prediction: **{predicted_class}**")
-
-
-
-
-
-
-
-#   SECOND MODEL
-
-
-# import streamlit as st
-# import numpy as np
-# import pickle
-# from PIL import Image
-# import matplotlib.pyplot as plt
-# import os
-
-
-# # Page config
-# st.set_page_config(page_title="Retinal Disease Detector", layout="wide")
-# st.title("🧠 Retinal Disease Detection Using Deep Learning")
-# st.markdown("""
-# Upload one or more **retinal fundus images**, and the model will predict whether the image shows signs of **Diabetic Retinopathy**, **Glaucoma**, or if it is **Healthy**.
-# """)
-
-
-# # Load model
-# @st.cache_resource
-# def load_model():
-#     model = pickle.load(open("model.pkl", "rb"))
-#     return model
-
-# model = load_model()
-# labels = ['Diabetic Retinopathy', 'Glaucoma', 'Healthy']
-
-
-
-# st.sidebar.title("🔍 Model Info")
-# st.sidebar.markdown("""
-# - **Model**: CNN
-# - **Input Size**: 224x224
-# - **Classes**: Diabetic Retinopathy, Glaucoma, Healthy
-# - **Framework**: TensorFlow/Keras
-# """)
-
-# # File uploader for multiple files
-# uploaded_files = st.file_uploader("Upload one or more retinal images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
-
-# if uploaded_files:
-#     for uploaded_file in uploaded_files:
-#         st.markdown("---")
-#         col1, col2 = st.columns([1, 2])
-
-#         # Load and display image
-#         image = Image.open(uploaded_file).convert("RGB")
-#         col1.image(image, caption=uploaded_file.name, use_column_width=True)
-
-#         # Preprocessing
-#         img = image.resize((224, 224))
-#         img = np.array(img) / 255.0
-#         img = np.expand_dims(img, axis=0)
-
-#         # Prediction
-#         prediction = model.predict(img)
-#         predicted_class = labels[np.argmax(prediction)]
-#         confidence = np.max(prediction)
-
-#         # Display results
-#         col2.subheader("🧪 Prediction Result")
-#         col2.write(f"**Class:** {predicted_class}")
-#         col2.write(f"**Confidence:** {confidence * 100:.2f}%")
-
-#         # Visualize prediction probabilities
-#         col2.subheader("📊 Confidence Breakdown")
-#         fig, ax = plt.subplots()
-#         ax.bar(labels, prediction[0], color=['orange', 'red', 'green'])
-#         ax.set_ylabel("Probability")
-#         ax.set_ylim([0, 1])
-#         st.pyplot(fig)
-
-#         # Placeholder Grad-CAM
-#         col2.subheader("🔍 Model Attention (Placeholder)")
-#         col2.image("https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Color_fundus_photograph_of_normal_right_eye.jpg/640px-Color_fundus_photograph_of_normal_right_eye.jpg",
-#                    caption="Example Grad-CAM Heatmap", use_column_width=True)
-
-# # Evaluation plots
-# st.markdown("---")
-# st.subheader("📈 Model Training Summary (Placeholder)")
-# fig2, ax2 = plt.subplots()
-# epochs = [1, 2, 3, 4, 5]
-# acc = [0.6, 0.72, 0.78, 0.82, 0.86]
-# loss = [1.2, 0.9, 0.6, 0.5, 0.4]
-# ax2.plot(epochs, acc, label="Accuracy", marker='o')
-# ax2.plot(epochs, loss, label="Loss", marker='x')
-# ax2.set_xlabel("Epoch")
-# ax2.set_title("Training Accuracy & Loss")
-# ax2.legend()
-# st.pyplot(fig2)
-
-# st.markdown("---")
-# st.markdown("Made with ❤️ by **Jay** | Deep learning Project")
-
-
-
-
-#  THIRD MODEL
-
-
-
-
 import streamlit as st
 import numpy as np
 import pickle
@@ -173,10 +23,6 @@ def load_model():
     return model
 
 
-# @st.cache_resource
-# def load_model():
-#     model = pickle.load(open("model.pkl", "rb"))
-#     return model
 
 model = load_model()
 labels = ['Diabetic Retinopathy', 'Glaucoma', 'Healthy']
@@ -229,14 +75,6 @@ if uploaded_files:
         else:
             col2.error(f"🔴 Class: {predicted_class}")
         col2.write(f"**Confidence:** {confidence * 100:.2f}%")
-
-        # Visualize prediction probabilities
-        # col2.subheader("📊 Confidence Breakdown")
-        # fig, ax = plt.subplots()
-        # ax.bar(labels, prediction[0], color=['orange', 'red', 'green'])
-        # ax.set_ylabel("Probability")
-        # ax.set_ylim([0, 1])
-        # st.pyplot(fig)
 
         col2.subheader("📊 Confidence Breakdown")
         fig, ax = plt.subplots(figsize=(4, 2))  # smaller figure
@@ -335,20 +173,6 @@ if report_data:
     col2.subheader("🔍 Model Attention (Placeholder)")
     col2.image("https://cdn.pixabay.com/photo/2024/02/06/16/09/ai-generated-8557387_1280.jpg",
                 caption="Example Grad-CAM Heatmap",  width=200 )
-
-# Evaluation plots
-# st.markdown("---")
-# st.subheader("📈 Model Training Summary (Placeholder)")
-# fig2, ax2 = plt.subplots()
-# epochs = [1, 2, 3, 4, 5]
-# acc = [0.6, 0.72, 0.78, 0.82, 0.86]
-# loss = [1.2, 0.9, 0.6, 0.5, 0.4]
-# ax2.plot(epochs, acc, label="Accuracy", marker='o')
-# ax2.plot(epochs, loss, label="Loss", marker='x')
-# ax2.set_xlabel("Epoch")
-# ax2.set_title("Training Accuracy & Loss")
-# ax2.legend()
-# st.pyplot(fig2)
 
 
 # Class distribution mock visualization
